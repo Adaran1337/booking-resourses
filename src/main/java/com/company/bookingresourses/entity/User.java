@@ -9,6 +9,7 @@ import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.security.authentication.JmixUserDetails;
 import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
@@ -18,12 +19,13 @@ import java.util.UUID;
 @JmixEntity
 @Entity
 @Table(name = "USER_", indexes = {
-        @Index(name = "IDX_USER__ON_USERNAME", columnList = "USERNAME", unique = true)
+        @Index(name = "IDX_USER__ON_USERNAME", columnList = "USERNAME", unique = true),
+        @Index(name = "IDX_EMPLOYEE_OFFICE_ID", columnList = "OFFICE_ID")
 })
 public class User implements JmixUserDetails, HasTimeZone {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     @JmixGeneratedValue
     private UUID id;
 
