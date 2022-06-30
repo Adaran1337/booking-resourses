@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://cabinetBrowse.caption"
+        focusComponent="cabinetsTable">
+    <data readOnly="true">
+        <collection id="cabinetsDc"
+                    class="com.company.bookingresourses.entity.Cabinet">
+            <fetchPlan extends="_base">
+                <property name="reservations" fetchPlan="_base"/>
+                <property name="office" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="cabinetsDl">
+                <query>
+                    <![CDATA[select e from Cabinet e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="cabinetsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="cabinetsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="cabinetsTable"
+                    width="100%"
+                    dataContainer="cabinetsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="office"/>
+                <column id="hasProjector"/>
+                <column id="hasInteractiveWhiteboard"/>
+                <column id="numberOfSeats"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="cabinetsTable.create"/>
+                <button id="editBtn" action="cabinetsTable.edit"/>
+                <button id="removeBtn" action="cabinetsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

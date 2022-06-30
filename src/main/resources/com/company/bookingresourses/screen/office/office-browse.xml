@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://officeBrowse.caption"
+        focusComponent="officesTable">
+    <data readOnly="true">
+        <collection id="officesDc"
+                    class="com.company.bookingresourses.entity.Office">
+            <fetchPlan extends="_base">
+                <property name="cabinets" fetchPlan="_base"/>
+                <property name="items" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="officesDl">
+                <query>
+                    <![CDATA[select e from Office e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="officesTable" spacing="true">
+        <filter id="filter"
+                dataLoader="officesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="officesTable"
+                    width="100%"
+                    dataContainer="officesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="address"/>
+                <column id="description"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="officesTable.create"/>
+                <button id="editBtn" action="officesTable.edit"/>
+                <button id="removeBtn" action="officesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

@@ -117,6 +117,8 @@
             <column name="DELETED_DATE" type="DATETIME"/>
             <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
             <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+            <column name="OFFICE_ID" type="UUID"/>
+            <column name="POSITION_" type="VARCHAR(255)"/>
         </addColumn>
     </changeSet>
     <changeSet id="6" author="booking-resourses">
@@ -130,28 +132,6 @@
         </update>
     </changeSet>
     <changeSet id="7" author="booking-resourses">
-        <addColumn tableName="USER_">
-            <column name="OFFICE_ID" type="UUID"/>
-        </addColumn>
-
-        <addNotNullConstraint columnName="OFFICE_ID" tableName="USER_"/>
-    </changeSet>
-    <changeSet id="8" author="booking-resourses">
-        <addColumn tableName="USER_">
-            <column name="POSITION_" type="VARCHAR(255)"/>
-        </addColumn>
-
-        <addNotNullConstraint columnName="POSITION_" defaultNullValue="''" tableName="USER_"/>
-    </changeSet>
-    <changeSet id="9" author="booking-resourses">
-        <createIndex indexName="IDX_EMPLOYEE_OFFICE_ID" tableName="USER_">
-            <column name="OFFICE_ID"/>
-        </createIndex>
-
-        <addForeignKeyConstraint baseColumnNames="OFFICE_ID" baseTableName="USER_" constraintName="FK_USER__ON_OFFICE"
-                                 referencedColumnNames="ID" referencedTableName="OFFICE"/>
-    </changeSet>
-    <changeSet id="10" author="booking-resourses">
         <createIndex indexName="IDX_RESERVATION_CABINET_ID" tableName="RESERVATION">
             <column name="CABINET_ID"/>
         </createIndex>
@@ -160,7 +140,7 @@
                                  constraintName="FK_RESERVATION_ON_CABINET" referencedColumnNames="ID"
                                  referencedTableName="CABINET"/>
     </changeSet>
-    <changeSet id="11" author="booking-resourses">
+    <changeSet id="8" author="booking-resourses">
         <createIndex indexName="IDX_RESERVATION_EMPLOYEE_ID" tableName="RESERVATION">
             <column name="EMPLOYEE_ID"/>
         </createIndex>
@@ -169,7 +149,7 @@
                                  constraintName="FK_RESERVATION_ON_EMPLOYEE" referencedColumnNames="ID"
                                  referencedTableName="USER_"/>
     </changeSet>
-    <changeSet id="12" author="booking-resourses">
+    <changeSet id="9" author="booking-resourses">
         <createIndex indexName="IDX_RESERVATION_ITEM_ID" tableName="RESERVATION">
             <column name="ITEM_ID"/>
         </createIndex>
@@ -178,13 +158,17 @@
                                  constraintName="FK_RESERVATION_ON_ITEM" referencedColumnNames="ID"
                                  referencedTableName="ITEM"/>
     </changeSet>
-    <changeSet id="13" author="booking-resourses">
+    <changeSet id="10" author="booking-resourses">
         <addForeignKeyConstraint baseColumnNames="OFFICE_ID" baseTableName="CABINET"
                                  constraintName="FK_CABINET_ON_OFFICE" referencedColumnNames="ID"
                                  referencedTableName="OFFICE"/>
     </changeSet>
-    <changeSet id="14" author="booking-resourses">
+    <changeSet id="11" author="booking-resourses">
         <addForeignKeyConstraint baseColumnNames="OFFICE_ID" baseTableName="ITEM" constraintName="FK_ITEM_ON_OFFICE"
+                                 referencedColumnNames="ID" referencedTableName="OFFICE"/>
+    </changeSet>
+    <changeSet id="12" author="booking-resourses">
+        <addForeignKeyConstraint baseColumnNames="OFFICE_ID" baseTableName="USER_" constraintName="FK_USER__ON_OFFICE"
                                  referencedColumnNames="ID" referencedTableName="OFFICE"/>
     </changeSet>
 </databaseChangeLog>

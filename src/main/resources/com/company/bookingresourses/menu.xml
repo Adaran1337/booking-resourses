@@ -4,6 +4,13 @@
     <menu id="application" caption="msg://com.company.bookingresourses/menu.application" insertBefore="administration">
         <item screen="User.browse" caption="msg://com.company.bookingresourses.screen.user/UserBrowse.caption"/>
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="Employee.browse"
+              caption="msg://com.company.bookingresourses.screen.employee/employeeBrowse.menu"/>
+        <item screen="Office.browse" caption="msg://com.company.bookingresourses.screen.office/officeBrowse.menu"/>
+        <item screen="Cabinet.browse" caption="msg://com.company.bookingresourses.screen.cabinet/cabinetBrowse.menu"/>
+        <item screen="Item.browse" caption="msg://com.company.bookingresourses.screen.item/itemBrowse.menu"/>
+        <item screen="Reservation.browse"
+              caption="msg://com.company.bookingresourses.screen.reservation/reservationBrowse.menu"/>
     </menu>
 
 </menu-config>

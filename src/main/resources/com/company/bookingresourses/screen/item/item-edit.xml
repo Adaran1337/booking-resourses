@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://itemEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="itemDc"
+                  class="com.company.bookingresourses.entity.Item">
+            <fetchPlan extends="_base">
+                <property name="reservations" fetchPlan="_base"/>
+                <property name="office" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="reservationsDc" property="reservations"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="scrollBox">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="itemDc">
+                <column width="350px">
+                    <textField id="nameField" property="name"/>
+                    <entityPicker id="officeField" property="office">
+                        <actions>
+                            <action id="entityLookup" type="entity_lookup"/>
+                            <action id="entityClear" type="entity_clear"/>
+                        </actions>
+                    </entityPicker>
+                    <textField id="descriptionField" property="description"/>
+                </column>
+            </form>
+            <groupBox id="reservationsBox" caption="msg://com.company.bookingresourses.entity/Item.reservations">
+                <table id="reservationsTable" dataContainer="reservationsDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="startDate"/>
+                        <column id="endDate"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="reservationsTable.create"/>
+                        <button action="reservationsTable.edit"/>
+                        <button action="reservationsTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
