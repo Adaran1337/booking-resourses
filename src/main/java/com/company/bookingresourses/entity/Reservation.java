@@ -40,11 +40,11 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     private Item item;
 
-    @OnDeleteInverse(DeletePolicy.CASCADE)
-    @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
     @NotNull
+    @OnDeleteInverse(DeletePolicy.DENY)
+    @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Employee employee;
+    private User employee;
 
     @Column(name = "START_DATE", nullable = false)
     @NotNull
@@ -85,6 +85,14 @@ public class Reservation {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    public void setEmployee(User employee) {
+        this.employee = employee;
+    }
+
+    public User getEmployee() {
+        return employee;
+    }
+
     public LocalDateTime getEndDate() {
         return endDate;
     }
@@ -99,14 +107,6 @@ public class Reservation {
 
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public Item getItem() {

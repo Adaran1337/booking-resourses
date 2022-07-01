@@ -5,7 +5,9 @@
     <data>
         <instance id="userDc"
                   class="com.company.bookingresourses.entity.User">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="office" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -41,6 +43,8 @@
                 <textField id="emailField" property="email"/>
                 <comboBox id="timeZoneField" property="timeZoneId"/>
                 <checkBox id="activeField" property="active"/>
+                <entityPicker id="officeField" property="office"/>
+                <textField id="positionField" property="position"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

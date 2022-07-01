@@ -28,6 +28,10 @@ public class Office {
     @Id
     private UUID id;
 
+    @Composition
+    @OneToMany(mappedBy = "office")
+    private List<User> employees;
+
     @InstanceName
     @Column(name = "NAME", nullable = false)
     @NotNull
@@ -80,6 +84,14 @@ public class Office {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public List<User> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<User> employees) {
+        this.employees = employees;
+    }
 
     public List<Item> getItems() {
         return items;
