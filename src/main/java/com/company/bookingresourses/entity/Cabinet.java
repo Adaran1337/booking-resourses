@@ -1,23 +1,18 @@
 package com.company.bookingresourses.entity;
 
-import io.jmix.core.DeletePolicy;
-import io.jmix.core.entity.annotation.OnDelete;
-import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
-@JmixEntity
 @Table(name = "CABINET")
+@JmixEntity
 @Entity
-public class Cabinet extends Resourse {
+public class Cabinet extends Resource {
     @Column(name = "HAS_PROJECTOR", nullable = false)
     @NotNull
     private Boolean hasProjector = false;
@@ -29,19 +24,6 @@ public class Cabinet extends Resourse {
     @Column(name = "NUMBER_OF_SEATS", nullable = false)
     @NotNull
     private Integer numberOfSeats;
-
-    @OnDelete(DeletePolicy.CASCADE)
-    @Composition
-    @OneToMany(mappedBy = "cabinet")
-    private List<Reservation> reservations;
-
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
 
     public Integer getNumberOfSeats() {
         return numberOfSeats;

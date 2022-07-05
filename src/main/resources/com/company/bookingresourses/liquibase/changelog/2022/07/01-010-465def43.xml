@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="booking-resourses">
+        <createTable tableName="Resource">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RESOURCE"/>
+            </column>
+            <column name="DTYPE" type="VARCHAR(31)"/>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OFFICE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="DATETIME"/>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="HAS_PROJECTOR" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HAS_INTERACTIVE_WHITEBOARD" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NUMBER_OF_SEATS" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="booking-resourses">
+        <addColumn tableName="RESERVATION">
+            <column name="RESOURCES_ID" type="UUID"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="RESOURCES_ID" tableName="RESERVATION"/>
+    </changeSet>
+    <changeSet id="3" author="booking-resourses">
+        <createIndex indexName="IDX_RESERVATION_RESOURCES_ID" tableName="RESERVATION">
+            <column name="RESOURCES_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="RESOURCES_ID" baseTableName="RESERVATION"
+                                 constraintName="FK_RESERVATION_ON_RESOURCES" referencedColumnNames="ID"
+                                 referencedTableName="Resource"/>
+    </changeSet>
+    <changeSet id="4" author="booking-resourses">
+        <addForeignKeyConstraint baseColumnNames="OFFICE_ID" baseTableName="Resource"
+                                 constraintName="FK_RESOURCE_ON_OFFICE" referencedColumnNames="ID"
+                                 referencedTableName="OFFICE"/>
+    </changeSet>
+    <changeSet id="5" author="booking-resourses">
+        <dropColumn columnName="CREATED_BY" tableName="CABINET"/>
+
+        <dropColumn columnName="CREATED_DATE" tableName="CABINET"/>
+
+        <dropColumn columnName="DELETED_BY" tableName="CABINET"/>
+
+        <dropColumn columnName="DELETED_DATE" tableName="CABINET"/>
+
+        <dropColumn columnName="LAST_MODIFIED_BY" tableName="CABINET"/>
+
+        <dropColumn columnName="LAST_MODIFIED_DATE" tableName="CABINET"/>
+
+        <dropColumn columnName="NAME" tableName="CABINET"/>
+
+        <dropColumn columnName="OFFICE_ID" tableName="CABINET"/>
+
+        <dropColumn columnName="VERSION" tableName="CABINET"/>
+    </changeSet>
+    <changeSet id="6" author="booking-resourses">
+        <dropColumn columnName="CREATED_BY" tableName="ITEM"/>
+
+        <dropColumn columnName="CREATED_DATE" tableName="ITEM"/>
+
+        <dropColumn columnName="DELETED_BY" tableName="ITEM"/>
+
+        <dropColumn columnName="DELETED_DATE" tableName="ITEM"/>
+
+        <dropColumn columnName="LAST_MODIFIED_BY" tableName="ITEM"/>
+
+        <dropColumn columnName="LAST_MODIFIED_DATE" tableName="ITEM"/>
+
+        <dropColumn columnName="NAME" tableName="ITEM"/>
+
+        <dropColumn columnName="OFFICE_ID" tableName="ITEM"/>
+
+        <dropColumn columnName="VERSION" tableName="ITEM"/>
+    </changeSet>
+</databaseChangeLog>

@@ -19,8 +19,6 @@ import java.util.UUID;
 
 @JmixEntity
 @Table(name = "RESERVATION", indexes = {
-        @Index(name = "IDX_RESERVATION_CABINET_ID", columnList = "CABINET_ID"),
-        @Index(name = "IDX_RESERVATION_ITEM_ID", columnList = "ITEM_ID"),
         @Index(name = "IDX_RESERVATION_EMPLOYEE_ID", columnList = "EMPLOYEE_ID")
 })
 @Entity
@@ -30,21 +28,16 @@ public class Reservation {
     @Id
     private UUID id;
 
-    @OnDeleteInverse(DeletePolicy.CASCADE)
-    @JoinColumn(name = "CABINET_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Cabinet cabinet;
-
-    @OnDeleteInverse(DeletePolicy.CASCADE)
-    @JoinColumn(name = "ITEM_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Item item;
-
     @NotNull
     @OnDeleteInverse(DeletePolicy.DENY)
     @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User employee;
+
+    @JoinColumn(name = "RESOURCES_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDeleteInverse(DeletePolicy.CASCADE)
+    private Resource resources;
 
     @Column(name = "START_DATE", nullable = false)
     @NotNull
@@ -85,6 +78,14 @@ public class Reservation {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    public void setResources(Resource resources) {
+        this.resources = resources;
+    }
+
+    public Resource getResources() {
+        return resources;
+    }
+
     public void setEmployee(User employee) {
         this.employee = employee;
     }
@@ -107,22 +108,6 @@ public class Reservation {
 
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public Cabinet getCabinet() {
-        return cabinet;
-    }
-
-    public void setCabinet(Cabinet cabinet) {
-        this.cabinet = cabinet;
     }
 
     public Date getDeletedDate() {

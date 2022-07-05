@@ -15,11 +15,15 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+@Table(name = "Resource")
 @JmixEntity
-@MappedSuperclass
-public class Resourse {
+//@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Resource {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
@@ -30,11 +34,14 @@ public class Resourse {
     @NotNull
     private String name;
 
-    @OnDelete(DeletePolicy.CASCADE)
     @JoinColumn(name = "OFFICE_ID", nullable = false)
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Office office;
+
+    @OneToMany(mappedBy = "resources")
+    @OnDelete(DeletePolicy.CASCADE)
+    private List<Reservation> reservations;
 
     @Column(name = "VERSION", nullable = false)
     @Version
@@ -66,6 +73,14 @@ public class Resourse {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
 
     public Office getOffice() {
         return office;

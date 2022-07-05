@@ -9,7 +9,6 @@
                 <property name="office" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
-            <collection id="reservationsDc" property="reservations"/>
         </instance>
     </data>
     <facets>
@@ -41,24 +40,24 @@
                     <textField id="descriptionField" property="description"/>
                 </column>
             </form>
-            <groupBox id="reservationsBox" caption="msg://com.company.bookingresourses.entity/Item.reservations">
-                <table id="reservationsTable" dataContainer="reservationsDc" width="100%" height="200px">
-                    <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
-                        <action id="remove" type="remove"/>
-                    </actions>
-                    <columns>
-                        <column id="startDate"/>
-                        <column id="endDate"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button action="reservationsTable.create"/>
-                        <button action="reservationsTable.edit"/>
-                        <button action="reservationsTable.remove"/>
-                    </buttonsPanel>
-                </table>
-            </groupBox>
+<!--            <groupBox id="reservationsBox" caption="msg://com.company.bookingresourses.entity/Item.reservations">-->
+<!--                <table id="reservationsTable" dataContainer="reservationsDc" width="100%" height="200px">-->
+<!--                    <actions>-->
+<!--                        <action id="create" type="create"/>-->
+<!--                        <action id="edit" type="edit"/>-->
+<!--                        <action id="remove" type="remove"/>-->
+<!--                    </actions>-->
+<!--                    <columns>-->
+<!--                        <column id="startDate"/>-->
+<!--                        <column id="endDate"/>-->
+<!--                    </columns>-->
+<!--                    <buttonsPanel>-->
+<!--                        <button action="reservationsTable.create"/>-->
+<!--                        <button action="reservationsTable.edit"/>-->
+<!--                        <button action="reservationsTable.remove"/>-->
+<!--                    </buttonsPanel>-->
+<!--                </table>-->
+<!--            </groupBox>-->
         </scrollBox>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>

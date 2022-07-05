@@ -7,7 +7,6 @@
         <collection id="cabinetsDc"
                     class="com.company.bookingresourses.entity.Cabinet">
             <fetchPlan extends="_base">
-                <property name="reservations" fetchPlan="_base"/>
                 <property name="office" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="cabinetsDl">

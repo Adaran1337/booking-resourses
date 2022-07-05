@@ -7,9 +7,8 @@
         <collection id="reservationsDc"
                     class="com.company.bookingresourses.entity.Reservation">
             <fetchPlan extends="_base">
-                <property name="cabinet" fetchPlan="_base"/>
-                <property name="item" fetchPlan="_base"/>
                 <property name="employee" fetchPlan="_base"/>
+                <property name="resources" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="reservationsDl">
                 <query>
@@ -48,11 +47,10 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="cabinet"/>
-                <column id="item"/>
                 <column id="employee"/>
                 <column id="startDate"/>
                 <column id="endDate"/>
+                <column id="resources"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

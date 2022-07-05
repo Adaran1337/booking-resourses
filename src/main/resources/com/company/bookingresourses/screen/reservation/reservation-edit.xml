@@ -6,9 +6,8 @@
         <instance id="reservationDc"
                   class="com.company.bookingresourses.entity.Reservation">
             <fetchPlan extends="_base">
-                <property name="cabinet" fetchPlan="_base"/>
-                <property name="item" fetchPlan="_base"/>
                 <property name="employee" fetchPlan="_base"/>
+                <property name="resources" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -32,18 +31,6 @@
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="reservationDc">
                 <column width="350px">
-                    <entityPicker id="cabinetField" property="cabinet">
-                        <actions>
-                            <action id="entityLookup" type="entity_lookup"/>
-                            <action id="entityClear" type="entity_clear"/>
-                        </actions>
-                    </entityPicker>
-                    <entityPicker id="itemField" property="item">
-                        <actions>
-                            <action id="entityLookup" type="entity_lookup"/>
-                            <action id="entityClear" type="entity_clear"/>
-                        </actions>
-                    </entityPicker>
                     <entityPicker id="employeeField" property="employee">
                         <actions>
                             <action id="entityLookup" type="entity_lookup"/>
@@ -52,6 +39,7 @@
                     </entityPicker>
                     <dateField id="startDateField" property="startDate"/>
                     <dateField id="endDateField" property="endDate"/>
+                    <entityPicker id="resourcesField" property="resources"/>
                 </column>
             </form>
         </scrollBox>

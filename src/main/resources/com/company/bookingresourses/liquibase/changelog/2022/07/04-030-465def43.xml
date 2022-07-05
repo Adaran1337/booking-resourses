@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="booking-resourses">
+        <addColumn tableName="CABINET">
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="DATETIME"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2" author="booking-resourses">
+        <addColumn tableName="ITEM">
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="DATETIME"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="3" author="booking-resourses">
+        <addColumn tableName="CABINET">
+            <column name="NAME" type="VARCHAR(255)"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="NAME" defaultNullValue="''" tableName="CABINET"/>
+    </changeSet>
+    <changeSet id="4" author="booking-resourses">
+        <addColumn tableName="ITEM">
+            <column name="NAME" type="VARCHAR(255)"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="NAME" defaultNullValue="''" tableName="ITEM"/>
+    </changeSet>
+    <changeSet id="5" author="booking-resourses">
+        <addColumn tableName="CABINET">
+            <column name="OFFICE_ID" type="UUID"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="OFFICE_ID" tableName="CABINET"/>
+    </changeSet>
+    <changeSet id="6" author="booking-resourses">
+        <addColumn tableName="ITEM">
+            <column name="OFFICE_ID" type="UUID"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="OFFICE_ID" tableName="ITEM"/>
+    </changeSet>
+    <changeSet id="7" author="booking-resourses">
+        <addColumn tableName="CABINET">
+            <column name="VERSION" type="INT"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="VERSION" defaultNullValue="0" tableName="CABINET"/>
+    </changeSet>
+    <changeSet id="8" author="booking-resourses">
+        <addColumn tableName="ITEM">
+            <column name="VERSION" type="INT"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="VERSION" defaultNullValue="0" tableName="ITEM"/>
+    </changeSet>
+    <changeSet id="9" author="booking-resourses">
+        <addForeignKeyConstraint baseColumnNames="OFFICE_ID" baseTableName="CABINET"
+                                 constraintName="FK_CABINET_ON_OFFICE" referencedColumnNames="ID"
+                                 referencedTableName="OFFICE"/>
+    </changeSet>
+    <changeSet id="10" author="booking-resourses">
+        <addForeignKeyConstraint baseColumnNames="OFFICE_ID" baseTableName="ITEM" constraintName="FK_ITEM_ON_OFFICE"
+                                 referencedColumnNames="ID" referencedTableName="OFFICE"/>
+    </changeSet>
+    <changeSet id="11" author="booking-resourses">
+        <dropColumn columnName="DESCRIPTION" tableName="RESOURCE"/>
+
+        <dropColumn columnName="DTYPE" tableName="RESOURCE"/>
+
+        <dropColumn columnName="HAS_INTERACTIVE_WHITEBOARD" tableName="RESOURCE"/>
+
+        <dropColumn columnName="HAS_PROJECTOR" tableName="RESOURCE"/>
+
+        <dropColumn columnName="NUMBER_OF_SEATS" tableName="RESOURCE"/>
+    </changeSet>
+</databaseChangeLog>

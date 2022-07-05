@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://itemBrowse.caption"
-        focusComponent="itemsTable">
+        caption="msg://resourceBrowse.caption"
+        focusComponent="resourcesTable">
     <data readOnly="true">
-        <collection id="itemsDc"
-                    class="com.company.bookingresourses.entity.Item">
+        <collection id="resourcesDc"
+                    class="com.company.bookingresourses.entity.Resource">
             <fetchPlan extends="_base">
-                <property name="office" fetchPlan="_base"/>
+                <property name="office" fetchPlan="_instance_name">
+                </property>
             </fetchPlan>
-            <loader id="itemsDl">
+            <loader id="resourcesDl">
                 <query>
-                    <![CDATA[select e from Item e]]>
+                    <![CDATA[select e from Resource e]]>
                 </query>
             </loader>
         </collection>
@@ -32,14 +33,14 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="itemsTable" spacing="true">
+    <layout expand="resourcesTable" spacing="true">
         <filter id="filter"
-                dataLoader="itemsDl">
+                dataLoader="resourcesDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="itemsTable"
+        <groupTable id="resourcesTable"
                     width="100%"
-                    dataContainer="itemsDc">
+                    dataContainer="resourcesDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -48,14 +49,13 @@
             <columns>
                 <column id="name"/>
                 <column id="office"/>
-                <column id="description"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="itemsTable.create"/>
-                <button id="editBtn" action="itemsTable.edit"/>
-                <button id="removeBtn" action="itemsTable.remove"/>
+                <button id="createBtn" action="resourcesTable.create"/>
+                <button id="editBtn" action="resourcesTable.edit"/>
+                <button id="removeBtn" action="resourcesTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
