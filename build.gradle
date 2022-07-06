@@ -41,6 +41,7 @@ dependencies {
     implementation("org.postgresql:postgresql")
     themes("io.jmix.ui:jmix-ui-themes")
     implementation("io.jmix.ui:jmix-ui-themes")
+    implementation("io.jmix.translations:jmix-translations-ru")
 }
 
 test {

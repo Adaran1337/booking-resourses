@@ -20,6 +20,8 @@ public class ResourceBrowse extends StandardLookup<Resource> {
     private DataGrid<Resource> resourcesTable;
     @Autowired
     private UiComponents uiComponents;
+    @Autowired
+    private MessageBundle messageBundle;
 
     @Subscribe("resourcesTable")
     public void onResourcesTableItemClick(DataGrid.ItemClickEvent<Resource> event) {
@@ -40,7 +42,7 @@ public class ResourceBrowse extends StandardLookup<Resource> {
         Label<String> infoLabel = uiComponents.create(Label.TYPE_STRING);
         infoLabel.setHtmlEnabled(true);
         infoLabel.setStyleName("h2");
-        infoLabel.setValue("Reservations:");
+        infoLabel.setValue(messageBundle.getMessage("reservation"));
 
         Component closeButton = createCloseButton(resource);
         headerBox.add(infoLabel);
@@ -75,7 +77,7 @@ public class ResourceBrowse extends StandardLookup<Resource> {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         StringBuilder sb = new StringBuilder();
         if (entity.getReservations().size() == 0) {
-            sb.append("<b>There isn't any reservations</b>");
+            sb.append("<b>").append(messageBundle.getMessage("missingReservation")).append("</b>");
         }
 
         for (int i = 0; i < entity.getReservations().size(); i++) {
@@ -83,8 +85,10 @@ public class ResourceBrowse extends StandardLookup<Resource> {
             User user = reservation.getEmployee();
             sb.append("<b>").append(i + 1).append(":</b> ")
                     .append(user.getUsername())
-                    .append(" reserved from: ").append(reservation.getStartDate().format(formatter))
-                    .append(" to ").append(reservation.getEndDate().format(formatter)).append("<br><br>");
+                    .append(" ").append(messageBundle.getMessage("reservedFrom")).append(" ")
+                    .append(reservation.getStartDate().format(formatter))
+                    .append(" ").append(messageBundle.getMessage("reservedTo")).append(" ")
+                    .append(reservation.getEndDate().format(formatter)).append("<br><br>");
         }
 
         content.setValue(sb.toString());
