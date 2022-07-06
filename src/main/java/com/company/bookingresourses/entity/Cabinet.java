@@ -6,12 +6,14 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Table(name = "CABINET")
 @JmixEntity
 @Entity
+@PrimaryKeyJoinColumn(name = "id", referencedColumnName = "ID")
 public class Cabinet extends Resource {
     @Column(name = "HAS_PROJECTOR", nullable = false)
     @NotNull

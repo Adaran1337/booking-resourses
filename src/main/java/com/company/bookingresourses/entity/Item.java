@@ -6,11 +6,13 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Table(name = "ITEM")
 @JmixEntity
 @Entity
+@PrimaryKeyJoinColumn(name = "id", referencedColumnName = "ID")
 public class Item extends Resource {
     @Column(name = "DESCRIPTION")
     private String description;

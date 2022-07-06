@@ -8,9 +8,9 @@
         <item screen="Item.browse" caption="msg://com.company.bookingresourses.screen.item/itemBrowse.menu"/>
         <item screen="Reservation.browse"
               caption="msg://com.company.bookingresourses.screen.reservation/reservationBrowse.menu"/>
+        <item screen="Cabinet.browse" caption="msg://com.company.bookingresourses.screen.cabinet/cabinetBrowse.menu"/>
         <item screen="Resource.browse"
               caption="msg://com.company.bookingresourses.screen.resource/resourceBrowse.menu"/>
-        <item screen="Cabinet.browse" caption="msg://com.company.bookingresourses.screen.cabinet/cabinetBrowse.menu"/>
     </menu>
 
 </menu-config>

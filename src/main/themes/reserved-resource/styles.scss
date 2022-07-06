@@ -1,0 +1,8 @@
+@import "reserved-resource-defaults";
+@import "addons";
+@import "reserved-resource";
+
+.reserved-resource {
+  @include addons;
+  @include reserved-resource;
+}

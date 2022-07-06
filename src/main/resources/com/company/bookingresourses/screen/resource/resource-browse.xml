@@ -7,7 +7,9 @@
         <collection id="resourcesDc"
                     class="com.company.bookingresourses.entity.Resource">
             <fetchPlan extends="_base">
-                <property name="office" fetchPlan="_instance_name">
+                <property name="office" fetchPlan="_instance_name"/>
+                <property name="reservations" fetchPlan="_base">
+                    <property name="employee" fetchPlan="_instance_name"/>
                 </property>
             </fetchPlan>
             <loader id="resourcesDl">
@@ -38,26 +40,24 @@
                 dataLoader="resourcesDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="resourcesTable"
-                    width="100%"
-                    dataContainer="resourcesDc">
+        <dataGrid id="resourcesTable"
+                  width="100%"
+                  dataContainer="resourcesDc">
             <actions>
-                <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="name"/>
-                <column id="office"/>
+                <column property="name" id="name"/>
+                <column property="office" id="office"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="resourcesTable.create"/>
                 <button id="editBtn" action="resourcesTable.edit"/>
                 <button id="removeBtn" action="resourcesTable.remove"/>
             </buttonsPanel>
-        </groupTable>
+        </dataGrid>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

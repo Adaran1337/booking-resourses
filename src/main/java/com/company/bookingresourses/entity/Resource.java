@@ -22,7 +22,8 @@ import java.util.UUID;
 @JmixEntity
 //@MappedSuperclass
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Resource {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
