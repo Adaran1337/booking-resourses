@@ -9,6 +9,7 @@
             <fetchPlan extends="_base">
                 <property name="cabinets" fetchPlan="_base"/>
                 <property name="items" fetchPlan="_base"/>
+                <property name="employees" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="officesDl">
                 <query>

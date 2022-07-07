@@ -1,5 +1,6 @@
 package com.company.bookingresourses.screen.item;
 
+import com.company.bookingresourses.app.ExpiredReservationService;
 import com.company.bookingresourses.app.ResourcesDataGridService;
 import com.company.bookingresourses.entity.Cabinet;
 import io.jmix.ui.UiComponents;
@@ -20,6 +21,13 @@ public class ItemBrowse extends StandardLookup<Item> {
     private UiComponents uiComponents;
     @Autowired
     private ResourcesDataGridService<Item> resourcesDataGridService;
+    @Autowired
+    private ExpiredReservationService expiredReservationService;
+
+    @Subscribe
+    public void onBeforeShow(BeforeShowEvent event) {
+        expiredReservationService.removeExpiredReservations();
+    }
 
     @Subscribe("itemsTable")
     public void onItemsTableItemClick(DataGrid.ItemClickEvent<Item> event) {

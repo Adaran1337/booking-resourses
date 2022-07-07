@@ -8,6 +8,9 @@
                     class="com.company.bookingresourses.entity.Item">
             <fetchPlan extends="_base">
                 <property name="office" fetchPlan="_base"/>
+                <property name="reservations" fetchPlan="_base">
+                    <property name="employee" fetchPlan="_base"/>
+                </property>
             </fetchPlan>
             <loader id="itemsDl">
                 <query>

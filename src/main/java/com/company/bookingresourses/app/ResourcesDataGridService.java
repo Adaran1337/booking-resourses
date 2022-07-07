@@ -3,28 +3,35 @@ package com.company.bookingresourses.app;
 import com.company.bookingresourses.entity.Reservation;
 import com.company.bookingresourses.entity.Resource;
 import com.company.bookingresourses.entity.User;
+import io.jmix.core.DataManager;
+import io.jmix.core.Id;
 import io.jmix.core.Messages;
 import io.jmix.ui.UiComponents;
 import io.jmix.ui.action.BaseAction;
 import io.jmix.ui.component.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Service
 public class ResourcesDataGridService<T extends Resource> {
+    private static final Logger log = LoggerFactory.getLogger(ResourcesDataGridService.class);
     @Autowired
     private Messages messages;
     private final String baseMessagePath = "com.company.bookingresourses.app.ResourcesDataGridService/";
-
-    public void onTableItemClick(DataGrid<T> table) {
-        table.setItemClickAction(new BaseAction("itemClickAction")
-                .withHandler(actionPerformedEvent ->
-                        table.setDetailsVisible(table.getSingleSelected(), true)));
-    }
+    @Autowired
+    private DataManager dataManager;
 
     public Component tableDetailsGenerator(UiComponents uiComponents, DataGrid<T> table, T entity) {
+        Component closeButton = createCloseButton(uiComponents, table, entity);
+        return createVBoxLayoutDetails(uiComponents, entity, closeButton);
+    }
+
+    public VBoxLayout createVBoxLayoutDetails(UiComponents uiComponents, T entity, Component ... components) {
         VBoxLayout mainLayout = uiComponents.create(VBoxLayout.class);
         mainLayout.setWidth("100%");
         mainLayout.setMargin(true);
@@ -37,14 +44,20 @@ public class ResourcesDataGridService<T extends Resource> {
         infoLabel.setStyleName("h2");
         infoLabel.setValue(messages.getMessage(baseMessagePath + "reservation"));
 
-        Component closeButton = createCloseButton(uiComponents, table, entity);
         headerBox.add(infoLabel);
-        headerBox.add(closeButton);
         headerBox.expand(infoLabel);
+
+        for (Component component : components) {
+            headerBox.add(component);
+        }
+
+        mainLayout.add(headerBox);
+        if (entity == null) {
+            return mainLayout;
+        }
 
         Component content = getContent(uiComponents, entity);
 
-        mainLayout.add(headerBox);
         mainLayout.add(content);
         mainLayout.expand(content);
 
@@ -62,10 +75,14 @@ public class ResourcesDataGridService<T extends Resource> {
         return closeButton;
     }
 
-    private Component getContent(UiComponents uiComponents, T entity) {
+    public Component getContent(UiComponents uiComponents, T entity) {
         Label<String> content = uiComponents.create(Label.TYPE_STRING);
         content.setHtmlEnabled(true);
         content.setId("contentLabel");
+
+        if (entity == null) {
+            return content;
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         StringBuilder sb = new StringBuilder();
@@ -75,9 +92,12 @@ public class ResourcesDataGridService<T extends Resource> {
 
         for (int i = 0; i < entity.getReservations().size(); i++) {
             Reservation reservation = entity.getReservations().get(i);
-            User user = reservation.getEmployee();
+            UUID userId = reservation.getEmployee().getId();
+            User user = dataManager.load(User.class).id(userId).one();
+            log.info("User:" + user.getId());
+            log.info("User:" + user.getFirstName());
             sb.append("<b>").append(i + 1).append(":</b> ")
-                    .append(user.getUsername())
+                    .append(user.getDisplayName())
                     .append(" ").append(messages.getMessage(baseMessagePath + "reservedFrom")).append(" ")
                     .append(reservation.getStartDate().format(formatter))
                     .append(" ").append(messages.getMessage(baseMessagePath + "reservedTo")).append(" ")

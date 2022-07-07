@@ -34,8 +34,9 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User employee;
 
-    @JoinColumn(name = "RESOURCES_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @JoinColumn(name = "RESOURCES_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDeleteInverse(DeletePolicy.CASCADE)
     private Resource resources;
 

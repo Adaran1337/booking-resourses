@@ -1,5 +1,6 @@
 package com.company.bookingresourses.screen.resource;
 
+import com.company.bookingresourses.app.ExpiredReservationService;
 import com.company.bookingresourses.app.ResourcesDataGridService;
 import com.company.bookingresourses.entity.Reservation;
 import com.company.bookingresourses.entity.User;
@@ -23,6 +24,13 @@ public class ResourceBrowse extends StandardLookup<Resource> {
     private UiComponents uiComponents;
     @Autowired
     private ResourcesDataGridService<Resource> resourcesDataGridService;
+    @Autowired
+    private ExpiredReservationService expiredReservationService;
+
+    @Subscribe
+    public void onBeforeShow(BeforeShowEvent event) {
+        expiredReservationService.removeExpiredReservations();
+    }
 
     @Subscribe("resourcesTable")
     public void onResourcesTableItemClick(DataGrid.ItemClickEvent<Resource> event) {

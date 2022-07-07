@@ -40,6 +40,7 @@
                     <dateField id="startDateField" property="startDate"/>
                     <dateField id="endDateField" property="endDate"/>
                     <entityPicker id="resourcesField" property="resources"/>
+                    <vbox id="resourceReservations"/>
                 </column>
             </form>
         </scrollBox>
