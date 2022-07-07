@@ -37,18 +37,18 @@
                 dataLoader="itemsDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="itemsTable"
-                    width="100%"
-                    dataContainer="itemsDc">
+        <dataGrid id="itemsTable"
+                  width="100%"
+                  dataContainer="itemsDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="name"/>
-                <column id="office"/>
-                <column id="description"/>
+                <column property="name" id="name"/>
+                <column property="office" id="office"/>
+                <column property="description" id="description"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
@@ -57,7 +57,7 @@
                 <button id="editBtn" action="itemsTable.edit"/>
                 <button id="removeBtn" action="itemsTable.remove"/>
             </buttonsPanel>
-        </groupTable>
+        </dataGrid>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

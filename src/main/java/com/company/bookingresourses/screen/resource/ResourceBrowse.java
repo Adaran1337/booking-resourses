@@ -1,5 +1,6 @@
 package com.company.bookingresourses.screen.resource;
 
+import com.company.bookingresourses.app.ResourcesDataGridService;
 import com.company.bookingresourses.entity.Reservation;
 import com.company.bookingresourses.entity.User;
 import io.jmix.ui.UiComponents;
@@ -21,7 +22,7 @@ public class ResourceBrowse extends StandardLookup<Resource> {
     @Autowired
     private UiComponents uiComponents;
     @Autowired
-    private MessageBundle messageBundle;
+    private ResourcesDataGridService<Resource> resourcesDataGridService;
 
     @Subscribe("resourcesTable")
     public void onResourcesTableItemClick(DataGrid.ItemClickEvent<Resource> event) {
@@ -32,68 +33,7 @@ public class ResourceBrowse extends StandardLookup<Resource> {
 
     @Install(to = "resourcesTable", subject = "detailsGenerator")
     private Component resourcesTableDetailsGenerator(Resource resource) {
-        VBoxLayout mainLayout = uiComponents.create(VBoxLayout.class);
-        mainLayout.setWidth("100%");
-        mainLayout.setMargin(true);
-
-        HBoxLayout headerBox = uiComponents.create(HBoxLayout.class);
-        headerBox.setWidth("100%");
-
-        Label<String> infoLabel = uiComponents.create(Label.TYPE_STRING);
-        infoLabel.setHtmlEnabled(true);
-        infoLabel.setStyleName("h2");
-        infoLabel.setValue(messageBundle.getMessage("reservation"));
-
-        Component closeButton = createCloseButton(resource);
-        headerBox.add(infoLabel);
-        headerBox.add(closeButton);
-        headerBox.expand(infoLabel);
-
-        Component content = getContent(resource);
-
-        mainLayout.add(headerBox);
-        mainLayout.add(content);
-        mainLayout.expand(content);
-
-        return mainLayout;
-    }
-
-    protected Component createCloseButton(Resource entity) {
-        Button closeButton = uiComponents.create(Button.class);
-        closeButton.setIcon("font-icon:TIMES");
-        BaseAction closeAction = new BaseAction("closeAction")
-                .withHandler(actionPerformedEvent ->
-                        resourcesTable.setDetailsVisible(entity, false))
-                .withCaption("");
-        closeButton.setAction(closeAction);
-        return closeButton;
-    }
-
-    protected Component getContent(Resource entity) {
-        Label<String> content = uiComponents.create(Label.TYPE_STRING);
-        content.setHtmlEnabled(true);
-        content.setId("contentLabel");
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        StringBuilder sb = new StringBuilder();
-        if (entity.getReservations().size() == 0) {
-            sb.append("<b>").append(messageBundle.getMessage("missingReservation")).append("</b>");
-        }
-
-        for (int i = 0; i < entity.getReservations().size(); i++) {
-            Reservation reservation = entity.getReservations().get(i);
-            User user = reservation.getEmployee();
-            sb.append("<b>").append(i + 1).append(":</b> ")
-                    .append(user.getUsername())
-                    .append(" ").append(messageBundle.getMessage("reservedFrom")).append(" ")
-                    .append(reservation.getStartDate().format(formatter))
-                    .append(" ").append(messageBundle.getMessage("reservedTo")).append(" ")
-                    .append(reservation.getEndDate().format(formatter)).append("<br><br>");
-        }
-
-        content.setValue(sb.toString());
-
-        return content;
+        return resourcesDataGridService.tableDetailsGenerator(uiComponents, resourcesTable, resource);
     }
 
     @Install(to = "resourcesTable", subject = "rowStyleProvider")
