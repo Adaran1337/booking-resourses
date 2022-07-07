@@ -95,4 +95,9 @@ public class ResourceBrowse extends StandardLookup<Resource> {
 
         return content;
     }
+
+    @Install(to = "resourcesTable", subject = "rowStyleProvider")
+    private String resourcesTableRowStyleProvider(Resource resource) {
+        return resource.getReservations().size() > 0 ? "reserved-resource" : null;
+    }
 }

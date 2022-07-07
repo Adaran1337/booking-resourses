@@ -1,6 +1,6 @@
 @import "../helium/helium";
 
-@mixin reserved-resource {
+@mixin helium-extended {
   @include helium;
 }
 

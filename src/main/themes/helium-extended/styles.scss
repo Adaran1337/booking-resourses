@@ -1,0 +1,13 @@
+@import "helium-extended-defaults";
+@import "addons";
+@import "helium-extended";
+
+.helium-extended {
+  @include addons;
+  @include helium-extended;
+}
+
+.v-grid-row.reserved-resource > td.v-grid-cell {
+  background-color: #ff647c;
+  color: black;
+}
