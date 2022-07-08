@@ -22,7 +22,7 @@ public class ExpiredReservationService {
                 .list();
 
         List<Reservation> expiredReservations = reservations.stream()
-                .filter(reservation -> reservation.getStartDate().isBefore(LocalDateTime.now()))
+                .filter(reservation -> reservation.getEndDate().isBefore(LocalDateTime.now()))
                 .collect(Collectors.toList());
 
         dataManager.remove(expiredReservations);

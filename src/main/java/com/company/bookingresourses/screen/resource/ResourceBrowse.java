@@ -2,8 +2,6 @@ package com.company.bookingresourses.screen.resource;
 
 import com.company.bookingresourses.app.ExpiredReservationService;
 import com.company.bookingresourses.app.ResourcesDataGridService;
-import com.company.bookingresourses.entity.Reservation;
-import com.company.bookingresourses.entity.User;
 import io.jmix.ui.UiComponents;
 import io.jmix.ui.action.BaseAction;
 import io.jmix.ui.component.*;
@@ -12,7 +10,6 @@ import com.company.bookingresourses.entity.Resource;
 import io.jmix.ui.screen.LookupComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.format.DateTimeFormatter;
 
 @UiController("Resource.browse")
 @UiDescriptor("resource-browse.xml")

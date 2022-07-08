@@ -19,7 +19,6 @@ import java.util.UUID;
 
 @Service
 public class ResourcesDataGridService<T extends Resource> {
-    private static final Logger log = LoggerFactory.getLogger(ResourcesDataGridService.class);
     @Autowired
     private Messages messages;
     private final String baseMessagePath = "com.company.bookingresourses.app.ResourcesDataGridService/";
@@ -94,8 +93,6 @@ public class ResourcesDataGridService<T extends Resource> {
             Reservation reservation = entity.getReservations().get(i);
             UUID userId = reservation.getEmployee().getId();
             User user = dataManager.load(User.class).id(userId).one();
-            log.info("User:" + user.getId());
-            log.info("User:" + user.getFirstName());
             sb.append("<b>").append(i + 1).append(":</b> ")
                     .append(user.getDisplayName())
                     .append(" ").append(messages.getMessage(baseMessagePath + "reservedFrom")).append(" ")

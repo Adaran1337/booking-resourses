@@ -45,12 +45,9 @@ public class ReservationEdit extends StandardEditor<Reservation> {
         }
     }
 
-    private void showNotification(String captionPath, String descriptionPath) {
-        notifications.create(Notifications.NotificationType.ERROR)
-                .withCaption(messageBundle.getMessage(captionPath))
-                .withDescription(messageBundle.getMessage(descriptionPath))
-                .withPosition(Notifications.Position.BOTTOM_RIGHT)
-                .show();
+    @Subscribe
+    public void onInitEntity(InitEntityEvent<Reservation> event) {
+        event.getEntity().setEmployee(reservationService.getCurrentEmployee());
     }
 
     @Subscribe("resourcesField")
@@ -69,5 +66,13 @@ public class ReservationEdit extends StandardEditor<Reservation> {
         VBoxLayout resourceReservations = (VBoxLayout) getWindow().getComponentNN("resourceReservations");
         resourceReservations.removeAll();
         resourceReservations.add(mainLayout);
+    }
+
+    private void showNotification(String captionPath, String descriptionPath) {
+        notifications.create(Notifications.NotificationType.ERROR)
+                .withCaption(messageBundle.getMessage(captionPath))
+                .withDescription(messageBundle.getMessage(descriptionPath))
+                .withPosition(Notifications.Position.BOTTOM_RIGHT)
+                .show();
     }
 }
