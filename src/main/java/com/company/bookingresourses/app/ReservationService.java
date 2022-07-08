@@ -2,11 +2,11 @@ package com.company.bookingresourses.app;
 
 import com.company.bookingresourses.entity.Reservation;
 import com.company.bookingresourses.entity.User;
-import io.jmix.core.security.CurrentAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,7 +24,10 @@ public class ReservationService {
         LocalDateTime inputStartDate = reservation.getStartDate();
         LocalDateTime inputEndDate = reservation.getEndDate();
 
-        for (Reservation resourceReservation : reservation.getResources().getReservations()) {
+        List<Reservation> resourceReservations = reservation.getResources().getReservations();
+        resourceReservations.remove(reservation);
+
+        for (Reservation resourceReservation : resourceReservations) {
             LocalDateTime resourceStartDate = resourceReservation.getStartDate();
             LocalDateTime resourceEndDate = resourceReservation.getEndDate();
             if (!((resourceEndDate.isBefore(inputStartDate) && resourceEndDate.isBefore(inputEndDate)) ||
