@@ -1,5 +1,6 @@
 package com.company.bookingresourses.screen.item;
 
+import com.company.bookingresourses.app.ResourceService;
 import io.jmix.ui.screen.*;
 import com.company.bookingresourses.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;

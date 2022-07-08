@@ -2,14 +2,19 @@ package com.company.bookingresourses.screen.item;
 
 import com.company.bookingresourses.app.ExpiredReservationService;
 import com.company.bookingresourses.app.ResourcesDataGridService;
-import com.company.bookingresourses.entity.Cabinet;
+import com.company.bookingresourses.app.CurrentUserService;
+import com.company.bookingresourses.entity.User;
 import io.jmix.ui.UiComponents;
 import io.jmix.ui.action.BaseAction;
 import io.jmix.ui.component.Component;
 import io.jmix.ui.component.DataGrid;
+import io.jmix.ui.model.CollectionContainer;
+import io.jmix.ui.model.CollectionLoader;
 import io.jmix.ui.screen.*;
 import com.company.bookingresourses.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @UiController("Item.browse")
 @UiDescriptor("item-browse.xml")
@@ -23,10 +28,26 @@ public class ItemBrowse extends StandardLookup<Item> {
     private ResourcesDataGridService<Item> resourcesDataGridService;
     @Autowired
     private ExpiredReservationService expiredReservationService;
+    @Autowired
+    private CurrentUserService currentUserService;
+    @Autowired
+    private CollectionContainer<Item> itemsDc;
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         expiredReservationService.removeExpiredReservations();
+    }
+
+    @Subscribe(id = "itemsDl", target = Target.DATA_LOADER)
+    public void onItemsDlPostLoad(CollectionLoader.PostLoadEvent<Item> event) {
+        User user = currentUserService.getCurrentUser();
+        if (currentUserService.isAdmin(user)) {
+            return;
+        }
+
+        List<Item> userAccessibleResources = currentUserService
+                .getUserAccessibleItems(event.getLoadedEntities(), user);
+        itemsDc.setItems(userAccessibleResources);
     }
 
     @Subscribe("itemsTable")
