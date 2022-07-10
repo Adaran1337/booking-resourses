@@ -1,0 +1,11 @@
+id;version;create_ts;created_by;update_ts;updated_by;delete_ts;deleted_by;username;role_code;role_type
+a7fc4058-6641-3ba7-2ed9-09df2af76fad;1;2022-07-11 00:48:55.708;admin;2022-07-11 00:48:55.708;;;;makarova_v;employee-role;resource
+b984a704-2660-4d06-4710-376f334502cb;1;2022-07-11 00:48:59.941;admin;2022-07-11 00:48:59.941;;;;fedotov_m;employee-role;resource
+011b307c-9b19-03c0-32ad-6f600db1085f;1;2022-07-11 00:49:07.691;admin;2022-07-11 00:49:07.691;;;;novikova_d;employee-role;resource
+a9fd9f81-d5fd-c020-5309-1b8abdc9f252;1;2022-07-11 00:49:12.62;admin;2022-07-11 00:49:12.62;;;;kuznecov_a;employee-role;resource
+d90e18a0-b20b-bf8b-4995-12646f6ceec7;1;2022-07-11 00:49:18.549;admin;2022-07-11 00:49:18.549;;;;bondarev_m;employee-role;resource
+51bbbc55-096b-0017-a3f7-7397bdbfcf8d;1;2022-07-11 00:49:23.34;admin;2022-07-11 00:49:23.34;;;;korneev_k;employee-role;resource
+23aea895-86dd-3d5e-76e0-e6cd933a4ad8;1;2022-07-11 00:49:27.863;admin;2022-07-11 00:49:27.863;;;;smirnova_a;employee-role;resource
+680d6eff-398d-4e3b-5a0a-751363101b75;1;2022-07-11 00:49:33.095;admin;2022-07-11 00:49:33.095;;;;vlasov_a;employee-role;resource
+eeeecbd3-0f77-f9a9-6c43-d217339d6050;1;2022-07-11 00:49:37.715;admin;2022-07-11 00:49:37.715;;;;borisov_p;employee-role;resource
+7ddb23af-a538-b75f-0c1d-019cd8e25f39;1;2022-07-11 00:49:42.741;admin;2022-07-11 00:49:42.741;;;;orlova_s;employee-role;resource

@@ -1,0 +1,2 @@
+id;version;create_ts;created_by;update_ts;updated_by;delete_ts;deleted_by;name;code;child_roles;sys_tenant_id;description;scopes
+e42f2986-eb62-bee5-b77d-ca8e768760c0;1;2022-07-06 19:48:16.006;admin;2022-07-06 19:48:16.006;;;;Employee;employee-role;""ui-minimal"";;A regular employee who can view a list of resources and reserve them and move them to other offices;""UI""

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="booking-resourses" >
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/sec_resource_role.csv"
+                  tableName="SEC_RESOURCE_ROLE" separator=";">
+            <column name="ID" header="ID" type="${uuid.type}"/>
+            <column name="CREATED_BY" type="varchar(50)"/>
+            <column name="UPDATED_BY" type="varchar(50)"/>
+            <column name="DELETED_BY" type="varchar(50)"/>
+            <column name="NAME" type="varchar(255)"/>
+            <column name="CODE" type="varchar(255)"/>
+            <column name="CHILD_ROLES" type="text"/>
+            <column name="SYS_TENANT_ID" type="varchar(255)"/>
+            <column name="DESCRIPTION" type="text"/>
+            <column name="SCOPES" type="varchar(1000)"/>
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/sec_resource_policy.csv"
+                  tableName="SEC_RESOURCE_POLICY" separator=";">
+            <column name="ID" type="${uuid.type}"/>
+            <column name="CREATED_BY" type="varchar(50)"/>
+            <column name="UPDATED_BY" type="varchar(50)"/>
+            <column name="DELETED_BY" type="varchar(50)"/>
+            <column name="TYPE_" type="varchar(255)"/>
+            <column name="POLICY_GROUP" type="varchar(255)"/>
+            <column name="RESOURCE_" type="varchar(1000)"/>
+            <column name="ACTION_" type="varchar(255)"/>
+            <column name="EFFECT" type="varchar(255)"/>
+            <column name="ROLE_ID" type="${uuid.type}"/>
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/office.csv"
+                  tableName="OFFICE" separator=";">
+            <column name="ID" header="ID" type="${uuid.type}"/>
+            <column name="NAME" type="varchar(255)"/>
+            <column name="ADDRESS" type="varchar(255)"/>
+            <column name="DESCRIPTION" type="varchar(255)"/>
+            <column name="CREATED_BY" type="varchar(50)"/>
+            <column name="CREATE_TS" type="datetime"/>
+            <column name="UPDATE_TS" type="datetime"/>
+            <column name="UPDATED_BY" type="varchar(50)"/>
+            <column name="DELETE_TS" type="datetime"/>
+            <column name="DELETED_BY" type="varchar(50)"/>
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/user_.csv"
+                  tableName="USER_" separator=";">
+            <column name="ID" header="ID" type="${uuid.type}"/>
+            <column name="USERNAME" type="varchar(255)"/>
+            <column name="FIRST_NAME" type="varchar(255)"/>
+            <column name="LAST_NAME" type="varchar(255)"/>
+            <column name="PASSWORD" type="varchar(255)"/>
+            <column name="EMAIL" type="varchar(255)"/>
+            <column name="ACTIVE" type="boolean"/>
+            <column name="TIME_ZONE_ID" type="varchar(255)"/>
+            <column name="CREATED_BY" type="varchar(50)"/>
+            <column name="CREATE_TS" type="datetime"/>
+            <column name="DELETE_TS" type="datetime"/>
+            <column name="DELETED_BY" type="varchar(50)"/>
+            <column name="UPDATE_TS" type="datetime"/>
+            <column name="UPDATED_BY" type="varchar(50)"/>
+            <column name="office_id" type="${uuid.type}"/>
+            <column name="POSITION_" type="varchar(255)"/>
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/sec_role_assigment.csv"
+                  tableName="sec_role_assignment" separator=";">
+            <column name="ID" header="ID" type="${uuid.type}"/>
+            <column name="CREATED_BY" type="varchar(50)"/>
+            <column name="UPDATED_BY" type="varchar(50)"/>
+            <column name="DELETED_BY" type="varchar(50)"/>
+            <column name="USERNAME" type="varchar(255)"/>
+            <column name="ROLE_CODE" type="varchar(255)"/>
+            <column name="ROLE_TYPE" type="varchar(255)"/>
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/resource.csv"
+                  tableName="resource" separator=";">
+            <column name="ID" header="ID" type="${uuid.type}"/>
+            <column name="NAME" type="varchar(255)"/>
+            <column name="OFFICE_ID" type="${uuid.type}"/>
+            <column name="CREATED_BY" type="varchar(50)"/>
+            <column name="CREATE_TS" type="datetime"/>
+            <column name="UPDATE_TS" type="datetime"/>
+            <column name="UPDATED_BY" type="varchar(50)"/>
+            <column name="DELETE_TS" type="datetime"/>
+            <column name="DELETED_BY" type="varchar(50)"/>
+            <column name="DTYPE" type="varchar(31)"/>
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/cabinet.csv"
+                  tableName="cabinet" separator=";">
+            <column name="ID" header="ID" type="${uuid.type}"/>
+            <column name="has_projector" type="boolean"/>
+            <column name="has_interactive_whiteboard" type="boolean"/>
+            <column name="number_of_seats" type="numeric"/>
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/item.csv"
+                  tableName="item" separator=";">
+            <column name="ID" header="ID" type="${uuid.type}"/>
+            <column name="description" type="varchar(50)"/>
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="/com/company/bookingresourses/liquibase/changelog/data/files/reservation.csv"
+                  tableName="reservation" separator=";">
+            <column name="ID" header="ID" type="${uuid.type}"/>
+            <column name="employee_id" type="${uuid.type}"/>
+            <column name="start_date" type="datetime"/>
+            <column name="end_date" type="datetime"/>
+            <column name="CREATED_BY" type="varchar(50)"/>
+            <column name="CREATE_TS" type="datetime"/>
+            <column name="UPDATE_TS" type="datetime"/>
+            <column name="UPDATED_BY" type="varchar(50)"/>
+            <column name="DELETE_TS" type="datetime"/>
+            <column name="DELETED_BY" type="varchar(50)"/>
+            <column name="resources_id" type="${uuid.type}"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
