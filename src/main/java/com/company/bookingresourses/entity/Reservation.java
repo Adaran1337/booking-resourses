@@ -29,7 +29,7 @@ public class Reservation {
     private UUID id;
 
     @NotNull
-    @OnDeleteInverse(DeletePolicy.DENY)
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User employee;
@@ -38,7 +38,7 @@ public class Reservation {
     @JoinColumn(name = "RESOURCES_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDeleteInverse(DeletePolicy.CASCADE)
-    private Resource resources;
+    private Resource resource;
 
     @Column(name = "START_DATE", nullable = false)
     @NotNull
@@ -79,12 +79,12 @@ public class Reservation {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
-    public void setResources(Resource resources) {
-        this.resources = resources;
+    public void setResource(Resource resources) {
+        this.resource = resources;
     }
 
-    public Resource getResources() {
-        return resources;
+    public Resource getResource() {
+        return resource;
     }
 
     public void setEmployee(User employee) {

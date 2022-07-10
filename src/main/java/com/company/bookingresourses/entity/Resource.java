@@ -20,7 +20,6 @@ import java.util.UUID;
 
 @Table(name = "Resource")
 @JmixEntity
-//@MappedSuperclass
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
@@ -40,7 +39,7 @@ public abstract class Resource {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Office office;
 
-    @OneToMany(mappedBy = "resources")
+    @OneToMany(mappedBy = "resource")
     @OnDelete(DeletePolicy.CASCADE)
     private List<Reservation> reservations;
 

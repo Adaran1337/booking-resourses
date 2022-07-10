@@ -7,7 +7,7 @@
                   class="com.company.bookingresourses.entity.Reservation">
             <fetchPlan extends="_base">
                 <property name="employee" fetchPlan="_base"/>
-                <property name="resources" fetchPlan="_base"/>
+                <property name="resource" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -39,7 +39,7 @@
                     </entityPicker>
                     <dateField id="startDateField" property="startDate"/>
                     <dateField id="endDateField" property="endDate"/>
-                    <entityPicker id="resourcesField" property="resources"/>
+                    <entityPicker id="resourcesField" property="resource"/>
                     <vbox id="resourceReservations"/>
                 </column>
             </form>

@@ -6,13 +6,8 @@
         <instance id="officeDc"
                   class="com.company.bookingresourses.entity.Office">
             <fetchPlan extends="_base">
-                <property name="cabinets" fetchPlan="_base"/>
-                <property name="items" fetchPlan="_base"/>
-                <property name="employees" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
-            <collection id="cabinetsDc" property="cabinets"/>
-            <collection id="itemsDc" property="items"/>
         </instance>
     </data>
     <facets>
@@ -39,44 +34,6 @@
                     <textField id="descriptionField" property="description"/>
                 </column>
             </form>
-            <groupBox id="cabinetsBox" caption="msg://com.company.bookingresourses.entity/Office.cabinets">
-                <table id="cabinetsTable" dataContainer="cabinetsDc" width="100%" height="200px">
-                    <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
-                        <action id="remove" type="remove"/>
-                    </actions>
-                    <columns>
-                        <column id="hasProjector"/>
-                        <column id="hasInteractiveWhiteboard"/>
-                        <column id="numberOfSeats"/>
-                        <column id="name"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button action="cabinetsTable.create"/>
-                        <button action="cabinetsTable.edit"/>
-                        <button action="cabinetsTable.remove"/>
-                    </buttonsPanel>
-                </table>
-            </groupBox>
-            <groupBox id="itemsBox" caption="msg://com.company.bookingresourses.entity/Office.items">
-                <table id="itemsTable" dataContainer="itemsDc" width="100%" height="200px">
-                    <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
-                        <action id="remove" type="remove"/>
-                    </actions>
-                    <columns>
-                        <column id="description"/>
-                        <column id="name"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button action="itemsTable.create"/>
-                        <button action="itemsTable.edit"/>
-                        <button action="itemsTable.remove"/>
-                    </buttonsPanel>
-                </table>
-            </groupBox>
         </scrollBox>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>

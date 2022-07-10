@@ -46,7 +46,7 @@ public class CabinetBrowse extends StandardLookup<Cabinet> {
         }
 
         List<Cabinet> userAccessibleResources = currentUserService
-                .getUserAccessibleCabinets(event.getLoadedEntities(), user);
+                .getUserAccessibleResources(event.getLoadedEntities(), user);
         cabinetsDc.setItems(userAccessibleResources);
     }
 

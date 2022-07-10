@@ -4,7 +4,6 @@ import com.company.bookingresourses.app.ExpiredReservationService;
 import com.company.bookingresourses.app.ResourcesDataGridService;
 import com.company.bookingresourses.app.CurrentUserService;
 import com.company.bookingresourses.entity.User;
-import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.ui.UiComponents;
 import io.jmix.ui.action.BaseAction;
 import io.jmix.ui.component.*;
@@ -33,8 +32,6 @@ public class ResourceBrowse extends StandardLookup<Resource> {
     @Autowired
     private CollectionContainer<Resource> resourcesDc;
     @Autowired
-    private CurrentAuthentication currentAuthentication;
-    @Autowired
     private CurrentUserService currentUserService;
 
     @Subscribe
@@ -51,7 +48,7 @@ public class ResourceBrowse extends StandardLookup<Resource> {
 
     @Subscribe(id = "resourcesDl", target = Target.DATA_LOADER)
     public void onResourcesDlPostLoad(CollectionLoader.PostLoadEvent<Resource> event) {
-        User user = (User) currentAuthentication.getAuthentication().getPrincipal();
+        User user = currentUserService.getCurrentUser();
         if (currentUserService.isAdmin(user)) {
             return;
         }

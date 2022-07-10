@@ -16,7 +16,7 @@ public class ReservationService {
 
     public boolean compareOffices(Reservation reservation) {
         UUID employeeOffice = reservation.getEmployee().getOffice().getId();
-        UUID resourceOffice = reservation.getResources().getOffice().getId();
+        UUID resourceOffice = reservation.getResource().getOffice().getId();
         return employeeOffice.equals(resourceOffice);
     }
 
@@ -24,7 +24,7 @@ public class ReservationService {
         LocalDateTime inputStartDate = reservation.getStartDate();
         LocalDateTime inputEndDate = reservation.getEndDate();
 
-        List<Reservation> resourceReservations = reservation.getResources().getReservations();
+        List<Reservation> resourceReservations = reservation.getResource().getReservations();
         resourceReservations.remove(reservation);
 
         for (Reservation resourceReservation : resourceReservations) {

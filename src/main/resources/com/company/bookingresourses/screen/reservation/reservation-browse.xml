@@ -8,7 +8,7 @@
                     class="com.company.bookingresourses.entity.Reservation">
             <fetchPlan extends="_base">
                 <property name="employee" fetchPlan="_base"/>
-                <property name="resources" fetchPlan="_base"/>
+                <property name="resource" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="reservationsDl">
                 <query>
@@ -50,7 +50,7 @@
                 <column id="employee"/>
                 <column id="startDate"/>
                 <column id="endDate"/>
-                <column id="resources"/>
+                <column id="resource"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

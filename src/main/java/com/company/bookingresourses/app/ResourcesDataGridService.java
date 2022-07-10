@@ -3,27 +3,21 @@ package com.company.bookingresourses.app;
 import com.company.bookingresourses.entity.Reservation;
 import com.company.bookingresourses.entity.Resource;
 import com.company.bookingresourses.entity.User;
-import io.jmix.core.DataManager;
-import io.jmix.core.Id;
 import io.jmix.core.Messages;
 import io.jmix.ui.UiComponents;
 import io.jmix.ui.action.BaseAction;
 import io.jmix.ui.component.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
+import java.util.Comparator;
 
 @Service
 public class ResourcesDataGridService<T extends Resource> {
     @Autowired
     private Messages messages;
     private final String baseMessagePath = "com.company.bookingresourses.app.ResourcesDataGridService/";
-    @Autowired
-    private DataManager dataManager;
 
     public Component tableDetailsGenerator(UiComponents uiComponents, DataGrid<T> table, T entity) {
         Component closeButton = createCloseButton(uiComponents, table, entity);
@@ -74,7 +68,7 @@ public class ResourcesDataGridService<T extends Resource> {
         return closeButton;
     }
 
-    public Component getContent(UiComponents uiComponents, T entity) {
+    private Component getContent(UiComponents uiComponents, T entity) {
         Label<String> content = uiComponents.create(Label.TYPE_STRING);
         content.setHtmlEnabled(true);
         content.setId("contentLabel");
@@ -89,10 +83,11 @@ public class ResourcesDataGridService<T extends Resource> {
             sb.append("<b>").append(messages.getMessage(baseMessagePath + "missingReservation")).append("</b>");
         }
 
+        entity.getReservations().sort(Comparator.comparing(Reservation::getStartDate));
+
         for (int i = 0; i < entity.getReservations().size(); i++) {
             Reservation reservation = entity.getReservations().get(i);
-            UUID userId = reservation.getEmployee().getId();
-            User user = dataManager.load(User.class).id(userId).one();
+            User user = reservation.getEmployee();
             sb.append("<b>").append(i + 1).append(":</b> ")
                     .append(user.getDisplayName())
                     .append(" ").append(messages.getMessage(baseMessagePath + "reservedFrom")).append(" ")

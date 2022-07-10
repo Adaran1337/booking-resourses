@@ -3,7 +3,6 @@ package com.company.bookingresourses.app;
 import com.company.bookingresourses.entity.Reservation;
 import io.jmix.core.DataManager;
 import io.jmix.core.querycondition.PropertyCondition;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

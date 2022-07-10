@@ -44,15 +44,11 @@ public class Office {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OnDelete(DeletePolicy.CASCADE)
-    @Composition
-    @OneToMany(mappedBy = "office")
-    private List<Cabinet> cabinets;
 
     @OnDelete(DeletePolicy.CASCADE)
     @Composition
     @OneToMany(mappedBy = "office")
-    private List<Item> items;
+    private List<Resource> resources;
 
     @Column(name = "VERSION", nullable = false)
     @Version
@@ -85,6 +81,14 @@ public class Office {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
+    }
+
     public List<User> getEmployees() {
         return employees;
     }
@@ -93,21 +97,6 @@ public class Office {
         this.employees = employees;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public List<Cabinet> getCabinets() {
-        return cabinets;
-    }
-
-    public void setCabinets(List<Cabinet> cabinets) {
-        this.cabinets = cabinets;
-    }
 
     public String getDescription() {
         return description;

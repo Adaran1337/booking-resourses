@@ -46,7 +46,7 @@ public class ItemBrowse extends StandardLookup<Item> {
         }
 
         List<Item> userAccessibleResources = currentUserService
-                .getUserAccessibleItems(event.getLoadedEntities(), user);
+                .getUserAccessibleResources(event.getLoadedEntities(), user);
         itemsDc.setItems(userAccessibleResources);
     }
 
