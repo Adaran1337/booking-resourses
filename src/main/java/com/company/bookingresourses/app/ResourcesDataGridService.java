@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 @Service
@@ -83,10 +84,11 @@ public class ResourcesDataGridService<T extends Resource> {
             sb.append("<b>").append(messages.getMessage(baseMessagePath + "missingReservation")).append("</b>");
         }
 
-        entity.getReservations().sort(Comparator.comparing(Reservation::getStartDate));
+        ArrayList<Reservation> reservations = new ArrayList<>(entity.getReservations());
+        reservations.sort(Comparator.comparing(Reservation::getStartDate));
 
-        for (int i = 0; i < entity.getReservations().size(); i++) {
-            Reservation reservation = entity.getReservations().get(i);
+        for (int i = 0; i < reservations.size(); i++) {
+            Reservation reservation = reservations.get(i);
             User user = reservation.getEmployee();
             sb.append("<b>").append(i + 1).append(":</b> ")
                     .append(user.getDisplayName())

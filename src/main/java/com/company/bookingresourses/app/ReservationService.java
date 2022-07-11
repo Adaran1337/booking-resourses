@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -45,8 +46,20 @@ public class ReservationService {
         return !inputStartDate.isAfter(inputEndDate) && !inputStartDate.isBefore(LocalDateTime.now());
     }
 
-    public User getCurrentEmployee() {
+    public boolean canActionBePerformed(Set<Reservation> reservations) {
         User user = currentUserService.getCurrentUser();
-        return currentUserService.isAdmin(user) ? null : user;
+        if (currentUserService.isAdmin(user)) {
+            return true;
+        }
+
+        boolean isEmployee = currentUserService.isEmployee(user);
+
+        for (Reservation reservation : reservations) {
+            if (isEmployee && reservation.getEmployee().getId().compareTo(user.getId()) != 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

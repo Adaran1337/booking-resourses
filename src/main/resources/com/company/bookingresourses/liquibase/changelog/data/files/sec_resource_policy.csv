@@ -42,7 +42,7 @@ cedb38c5-5262-0b7e-6a50-1010ccf0cbc7;1;2022-07-08 01:37:50.216;admin;2022-07-08 
 d8cf76e2-c5b8-1484-9691-dcb76c9ba0a3;1;2022-07-08 01:37:50.216;admin;2022-07-08 01:37:50.216;;;;screen;Item;Item.edit;access;allow;e42f2986-eb62-bee5-b77d-ca8e768760c0
 d646249e-7b2b-c7b0-8a9d-4cfd6a338c8b;1;2022-07-08 01:37:50.216;admin;2022-07-08 01:37:50.216;;;;menu;Item;Item.browse;access;allow;e42f2986-eb62-bee5-b77d-ca8e768760c0
 2988ad27-f54f-0628-2183-c891371b9454;1;2022-07-08 01:37:50.216;admin;2022-07-08 01:37:50.216;;;;menu;Cabinet;Cabinet.browse;access;allow;e42f2986-eb62-bee5-b77d-ca8e768760c0
-27c1df93-4648-8e11-fe22-8b7fe48ee704;2;2022-07-08 01:32:51.813;admin;2022-07-08 01:40:41.073;admin;;;entityAttribute;Reservation;Reservation.resources;modify;allow;e42f2986-eb62-bee5-b77d-ca8e768760c0
+27c1df93-4648-8e11-fe22-8b7fe48ee704;2;2022-07-08 01:32:51.813;admin;2022-07-08 01:40:41.073;admin;;;entityAttribute;Reservation;Reservation.resource;modify;allow;e42f2986-eb62-bee5-b77d-ca8e768760c0
 f6b56361-783c-c187-bc60-66bde10e2778;1;2022-07-08 12:57:31.86;admin;2022-07-08 12:57:31.86;;;;entityAttribute;User;User.reservations;view;allow;e42f2986-eb62-bee5-b77d-ca8e768760c0
 e57b1f28-0fec-90b0-3895-1339fd3e535b;1;2022-07-08 12:57:31.86;admin;2022-07-08 12:57:31.86;;;;entityAttribute;User;User.lastName;view;allow;e42f2986-eb62-bee5-b77d-ca8e768760c0
 67ef2758-f7fd-48b7-ea13-52421bc759f9;1;2022-07-08 12:57:31.86;admin;2022-07-08 12:57:31.86;;;;entityAttribute;User;User.username;view;allow;e42f2986-eb62-bee5-b77d-ca8e768760c0
